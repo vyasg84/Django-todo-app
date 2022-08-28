@@ -63,16 +63,15 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       -
         name: Build and push
+        run: |
+            - docker build -t vyasg84/djnago-todo-app:latest .
+            - docker build -t vyasg84/nginx-todo -f Dockerfile.nginx .
+            - docker push vyasg84/djnago-todo-app:latest
+            - docker push vyasg84/nginx-todo
         uses: docker/build-push-action@v3
         with:
           image: vyasg84/djnago-todo-app
           context: .
           push: true
           tags: vyasg84/djnago-todo-app:latest
-      -
-        name: Run Container
-        run: |
-            - docker build -t vyasg84/djnago-todo-app:latest .
-            - docker build -t vyasg84/nginx-todo -f Dockerfile.nginx .
-            - docker push vyasg84/djnago-todo-app:latest
-            - docker push vyasg84/nginx-todo
+      
