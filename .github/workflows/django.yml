@@ -18,9 +18,9 @@ jobs:
         DOCKER_PASSWORD: '${{ secrets.DOCKER_PASSWORD }}'
      
      run: |
-            - docker build -f Dockerfile -t vyasg84/djnago-todo-app:latest .
-            - docker build -f Dockerfile.nginx -t vyasg84/nginx-todo:latest .
-            - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-            - docker push docker.io/vyasg84/djnago-todo-app:latest
-            - docker push docker.io/vyasg84/nginx-todo:latest
+            docker build -f Dockerfile -t vyasg84/djnago-todo-app:latest .
+            docker build -f Dockerfile.nginx -t vyasg84/nginx-todo:latest .
+            docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+            docker push docker.io/vyasg84/djnago-todo-app:latest
+            docker push docker.io/vyasg84/nginx-todo:latest
     
