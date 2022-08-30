@@ -66,8 +66,9 @@ jobs:
         run: |
             - docker build -t vyasg84/djnago-todo-app:latest .
             - docker build -t vyasg84/nginx-todo -f Dockerfile.nginx .
+            - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
             - docker push vyasg84/djnago-todo-app:latest
-            - docker push vyasg84/nginx-todo
+            - docker push vyasg84/nginx-todo:latest
         uses: docker/build-push-action@v3
         with:
           image: vyasg84/djnago-todo-app
