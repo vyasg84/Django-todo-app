@@ -1,22 +1,22 @@
-name: Django application
+name: Python with Django	
 
-on:
-  push:
+on:	
+  push:	
+    branches: [ "main" ]	
+  pull_request:	
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
 jobs:
   build: 
    name: build docker images
    runs-on: ubuntu-latest
    steps:
-   - name: Checkout
+   - name: checkout step
      uses: actions/checkout@v3
    - name: Build Docker Image   
      env:
         DOCKER_USER: '${{ secrets.DOCKER_USER }}'
-        DOCKER_PASSWORD: '${{ secrets.DOCKER_PASSWORD }}'    
+        DOCKER_PASSWORD: '${{ secrets.DOCKER_PASSWORD }}'
+     
      run: |
             - docker build -f Dockerfile -t vyasg84/djnago-todo-app:latest .
             - docker build -f Dockerfile.nginx -t vyasg84/nginx-todo:latest .
