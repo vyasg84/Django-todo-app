@@ -41,13 +41,12 @@ jobs:
       username: ${{ secrets.USERNAME }}
       password: ${{ secrets.PASSWORD }}
       port: ${{ secrets.PORT }}
-      script: whoami
-#       script: |
-#         docker image rmi -f vyasg84/djnago-todo-app:latest &&
-#         docker image rmi -f vyasg84/nginx-todo:latest &&
-#         rm -rf Django-todo-app &&
-#         git clone https://github.com/vyasg84/Django-todo-app.git &&
-#         cd Django-todo-app &&
-#         docker-compose down &&
-#         docker-compose up -d
+      script: |
+            docker image rmi -f vyasg84/djnago-todo-app:latest &&
+            docker image rmi -f vyasg84/nginx-todo:latest &&
+            rm -rf Django-todo-app &&
+            git clone https://github.com/vyasg84/Django-todo-app.git &&
+            cd Django-todo-app &&
+            docker-compose down &&
+            docker-compose up -d
     
