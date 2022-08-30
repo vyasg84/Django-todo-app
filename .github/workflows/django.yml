@@ -48,5 +48,5 @@ jobs:
             git clone https://github.com/vyasg84/Django-todo-app.git &&
             cd Django-todo-app &&
             docker-compose down &&
-            docker-compose up -d
+            docker-compose up -d --build
     
