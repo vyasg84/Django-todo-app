@@ -23,4 +23,31 @@ jobs:
             docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
             docker push docker.io/vyasg84/djnago-todo-app:latest
             docker push docker.io/vyasg84/nginx-todo:latest
+  deploy: 
+   name: deploy
+   needs: build
+   runs-on: ubuntu-latest
+   steps:
+   - name: Install SSH Key
+     uses: shimataro/ssh-key-action@v2
+     with:
+       key: ${{ secrets.SSH_PRIVATE_KEY }} 
+       known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
+   
+   - name: executing remote ssh commands using password
+     uses: appleboy/ssh-action@master
+     with:
+      host: ${{ secrets.SSH_HOST }}
+      username: ${{ secrets.USERNAME }}
+      password: ${{ secrets.PASSWORD }}
+      port: ${{ secrets.PORT }}
+      script: |
+    
+        docker image rmi -f vyasg84/djnago-todo-app:latest &&
+        docker image rmi -f vyasg84/nginx-todo:latest &&
+        rm -rf Django-todo-app &&
+        git clone https://github.com/vyasg84/Django-todo-app.git &&
+        cd Django-todo-app &&
+        docker-compose down &&
+        docker-compose up -d
     
