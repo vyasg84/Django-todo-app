@@ -11,6 +11,6 @@ docker pull vyasg84/djnago-todo-app:1.0
 docker pull vyasg84/nginx-todo:1.0
 cd Django-todo-jenkins
 echo "Creating new container on server"
-docker-compose up
+docker-compose up -d
 echo "Show Running container on server"
 docker ps -a
